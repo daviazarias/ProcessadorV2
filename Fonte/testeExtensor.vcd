@@ -1,0 +1,52 @@
+$date
+	Sun May 25 09:17:15 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testeExtensor $end
+$var wire 16 ! imm [15:0] $end
+$var reg 16 " iin [15:0] $end
+$scope module e $end
+$var wire 16 # iin [15:0] $end
+$var wire 16 $ imediato [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 $
+b0 #
+b0 "
+b0 !
+$end
+#3
+b11111111 !
+b11111111 $
+b11111111 "
+b11111111 #
+#6
+b111111111 !
+b111111111 $
+b111111111 "
+b111111111 #
+#9
+b1111111011111111 !
+b1111111011111111 $
+b1011111111 "
+b1011111111 #
+#12
+b1111111111111111 !
+b1111111111111111 $
+b1111111111 "
+b1111111111 #
+#15
+b111111111111 "
+b111111111111 #
+#18

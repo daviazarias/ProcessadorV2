@@ -1,0 +1,289 @@
+$date
+	Fri Jun  6 20:53:28 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testbench $end
+$var wire 2 ! alu_op_selec [1:0] $end
+$var wire 4 " mux_key [3:0] $end
+$var wire 8 # regs_enable [7:0] $end
+$var wire 2 $ counter [1:0] $end
+$var wire 1 % alu_output_enable $end
+$var wire 1 & a_enable $end
+$var reg 1 ' clock $end
+$var reg 16 ( iin [15:0] $end
+$var reg 1 ) resetn $end
+$scope module c $end
+$var wire 1 ) clear $end
+$var wire 1 ' clock $end
+$var reg 2 * saida_cont [1:0] $end
+$upscope $end
+$scope module l $end
+$var wire 2 + alu_op_select [1:0] $end
+$var wire 2 , counter [1:0] $end
+$var wire 9 - iin [8:0] $end
+$var wire 4 . mux_select [3:0] $end
+$var wire 1 ) resetn $end
+$var wire 8 / regs_select [7:0] $end
+$var wire 8 0 regs_enable [7:0] $end
+$var wire 1 % alu_output_enable $end
+$var wire 1 & a_enable $end
+$var reg 3 1 opcode [2:0] $end
+$var reg 3 2 rx [2:0] $end
+$var reg 3 3 ry [2:0] $end
+$scope module decode $end
+$var wire 3 4 chave [2:0] $end
+$var reg 8 5 saida [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx 5
+bx 4
+bx 3
+bx 2
+bx 1
+bx 0
+bx /
+bz .
+bx -
+bx ,
+bz +
+bx *
+1)
+bx (
+0'
+x&
+x%
+bx $
+bx #
+bz "
+bz !
+$end
+#1
+b0 #
+b0 0
+0&
+0%
+b0 $
+b0 *
+b0 ,
+1'
+#2
+0'
+0)
+#3
+1&
+b1 $
+b1 *
+b1 ,
+1'
+#4
+0'
+#5
+0&
+1%
+b10 $
+b10 *
+b10 ,
+1'
+#6
+0'
+#7
+bx #
+bx 0
+0%
+b11 $
+b11 *
+b11 ,
+1'
+#8
+0'
+#9
+b0 #
+b0 0
+b0 $
+b0 *
+b0 ,
+1'
+#10
+b101000000 -
+0'
+b1010000000011100 (
+#11
+1&
+b1 $
+b1 *
+b1 ,
+1'
+#12
+0'
+#13
+0&
+1%
+b10 $
+b10 *
+b10 ,
+1'
+#14
+0'
+#15
+bx #
+bx 0
+0%
+b11 $
+b11 *
+b11 ,
+1'
+#16
+0'
+#17
+b1 /
+b1 5
+b0 3
+b0 2
+b0 4
+b101 1
+b0 #
+b0 0
+b0 $
+b0 *
+b0 ,
+1'
+#18
+b101001000 -
+0'
+b1010010000001010 (
+#19
+1&
+b1 $
+b1 *
+b1 ,
+1'
+#20
+0'
+#21
+0&
+1%
+b10 $
+b10 *
+b10 ,
+1'
+#22
+0'
+#23
+b1 #
+b1 0
+0%
+b11 $
+b11 *
+b11 ,
+1'
+#24
+0'
+#25
+b10 /
+b10 5
+b1 2
+b1 4
+b0 #
+b0 0
+b0 $
+b0 *
+b0 ,
+1'
+#26
+b1000001 -
+0'
+b10000010000000 (
+#27
+1&
+b1 $
+b1 *
+b1 ,
+1'
+#28
+0'
+#29
+0&
+1%
+b10 $
+b10 *
+b10 ,
+1'
+#30
+0'
+#31
+b10 #
+b10 0
+0%
+b11 $
+b11 *
+b11 ,
+1'
+#32
+0'
+#33
+b1 /
+b1 5
+b1 3
+b0 2
+b0 4
+b1 1
+b0 #
+b0 0
+b0 $
+b0 *
+b0 ,
+1'
+#34
+b100000000 -
+0'
+b1000000000000000 (
+#35
+1&
+b1 $
+b1 *
+b1 ,
+1'
+#36
+0'
+#37
+0&
+1%
+b10 $
+b10 *
+b10 ,
+1'
+#38
+0'
+#39
+b1 #
+b1 0
+0%
+b11 $
+b11 *
+b11 ,
+1'
+#40
+0'
+#41
+b0 3
+b100 1
+b0 #
+b0 0
+b0 $
+b0 *
+b0 ,
+1'
+#42
+0'
