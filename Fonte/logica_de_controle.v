@@ -52,21 +52,20 @@ begin
         rx     = iin[5:3];
         ry     = iin[2:0];
 
-        mux_select = `NO_OUTPUT;
+        if(`ALU_OPERATION)
+            mux_select <= {1'b0,rx};
     end
 
     2'b10: 
-        case(opcode)
-            `LDI, `REP: mux_select <= `NO_OUTPUT;
-            default:    mux_select <= {1'b0,rx};
-        endcase
+        if(`ALU_OPERATION)
+            mux_select <= {1'b0,ry};
 
     2'b11: 
         case(opcode)
-            `ADD, `SUB, `NAN: mux_select <= `ULA_OUT_SELECT;
-            `LDI:             mux_select <= `IMM_SELECT;
-            `OUT:             mux_select <= {1'b0, rx};
-            default:          mux_select <= {1'b0, ry};
+            `OUT:    mux_select <= {1'b0, rx};
+            `REP:    mux_select <= {1'b0, ry};
+            `LDI:    mux_select <= `IMM_SELECT;
+            default: mux_select <= `ULA_OUT_SELECT;
         endcase
 
     endcase
