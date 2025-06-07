@@ -16,8 +16,8 @@ processador p(clock, resetn, iin, bus);
 initial begin
     # 0 resetn <= 1'b0;
     # 0 iin <= 16'b1010000000011100;
-    # 8 iin = 16'b1010010000001010;
-    # 8 iin = 16'b1000000000000000;
+    # 8 iin =  16'b1010010000001010;
+    # 8 iin =  16'b1000010000000000;
     # 8 $finish;
 end
 endmodule
