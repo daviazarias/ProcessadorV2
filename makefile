@@ -4,15 +4,15 @@ FONTE = Fonte/
 ARQ_SAIDA = testbench
 ARQ_VCD = testbench.vcd
 
-all: exe
+all: $(ARQ_VCD)
 
-exe: $(ARQ_SAIDA)
-	@ vvp $(SAIDA) $(ARQ_SAIDA)
+$(ARQ_VCD): $(ARQ_SAIDA)
+	@ vvp $(ARQ_SAIDA)
 
 $(ARQ_SAIDA): 
 	@ iverilog -I$(FONTE) $(ARQ_TESTE) -o $(ARQ_SAIDA) 
 
-wave: $(ARQ_SAIDA)
+wave: $(ARQ_SAIDA) $(ARQ_VCD)
 	@ gtkwave $(ARQ_VCD)
 
 clean: 
