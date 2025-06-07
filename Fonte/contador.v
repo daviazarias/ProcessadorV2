@@ -1,8 +1,7 @@
-module contador(clock,clear,saida_cont);
-
-input clock;
-input clear;
-output reg [1:0] saida_cont;
+module contador(
+    input clock,
+    input clear,
+    output reg [1:0] saida_cont);
 
 always @(posedge clock)
 begin

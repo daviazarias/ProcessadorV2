@@ -1,9 +1,9 @@
-module registrador(wr_enable,clock,entrada_reg,saida_reg);
-
-input wr_enable;
-input clock;
-input [15:0] entrada_reg;
-output reg [15:0] saida_reg;
+module registrador(
+    input wr_enable,
+    input clock,
+    input [15:0] entrada_reg,
+    output reg [15:0] saida_reg
+);
 
 always @(posedge clock)
 begin
