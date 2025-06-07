@@ -19,7 +19,7 @@ wire [15:0] r0_out, r1_out, r2_out, r3_out, r4_out, r5_out, r6_out, r7_out;
 
 contador cont(clock, clear, saida_contador);
 extensor ext(iin[9:0], imm);
-logica_de_controle log(resetn, saida_contador, iin[15:7],
+logica_de_controle log_ctl(resetn, saida_contador, iin[15:7],
     reg_address, regs_enable, alu_op_select, reg_a_enable, imm_select,
     alu_output_enable, alu_output_select, clear);
 

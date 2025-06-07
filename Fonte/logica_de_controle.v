@@ -9,9 +9,9 @@ module logica_de_controle(
     output [1:0] alu_op_select,
     output       reg_a_enable,
     output       imm_select,
-    output       alu_output_enable,
-    output       alu_output_select,
-    output       clear
+    output       alu_reg_enable,
+    output       alu_reg_select,
+    output  reg  clear
 );
 
 `define REP 3'b111
@@ -22,23 +22,27 @@ reg  [2:0] opcode, rx, ry;
 wire [7:0] regs_select;
 decodificador decode(rx, regs_select);
 
-assign reg_a_enable      = (counter == 2'b01); 
-assign reg_address       = (counter == 2'b01) ? {1'b0, rx} : {1'b0, ry};
-assign alu_output_enable = (counter == 2'b10);
-assign alu_output_select = (counter == 2'b11 && opcode != `REP && opcode != `LDI);
-assign imm_select        = (counter == 2'b11 && opcode == `LDI);
-assign regs_enable       = (counter == 2'b11 && opcode != `OUT) ? regs_select : 8'h00;
-
-assign alu_op_select     = (!opcode[2]) ? opcode[1:0] : 2'b11;
-assign clear             = resetn;
+assign reg_a_enable   = (counter == 2'b01); 
+assign reg_address    = (counter == 2'b01 || opcode == `OUT) ? {1'b0, rx} : {1'b0, ry};
+assign alu_reg_enable = (counter == 2'b10);
+assign alu_reg_select = (counter == 2'b11 && !opcode[2]);
+assign imm_select     = (counter == 2'b11 && opcode == `LDI);
+assign regs_enable    = (counter == 2'b11 && opcode != `OUT) ? regs_select : 8'h00;
+assign alu_op_select  = (!opcode[2]) ? opcode[1:0] : 2'b11;
 
 always @(counter) 
 begin
-    if(counter == 2'b00) begin
+    if(counter == 2'b01) begin
         opcode <= iin[8:6];
         rx     <= iin[5:3];
         ry     <= iin[2:0];
     end
+end
+
+always @(negedge resetn)
+begin
+    clear = 1'b1;
+    clear = 1'b0;
 end
 
 endmodule
