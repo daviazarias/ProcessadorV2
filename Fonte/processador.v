@@ -3,6 +3,7 @@
 `include "multiplexador.v"
 `include "contador.v"
 `include "extensor.v"
+`include "ula.v"
 
 module processador(
     input clock,
@@ -15,13 +16,14 @@ wire [3:0] mux_select;
 wire [7:0] regs_enable;
 wire [1:0] alu_op_select;
 wire [1:0] saida_contador;
-wire [15:0] data_bus, imm, a_reg_out, alu_out;
+wire [15:0] data_bus, imm, a_reg_out, alu_out, alu_reg_out;
 wire [15:0] r0_out, r1_out, r2_out, r3_out, r4_out, r5_out, r6_out, r7_out;
 
 contador cont(clock, clear, saida_contador);
 extensor ext(iin[9:0], imm);
+ula alu(a_reg_out,data_bus,alu_op_select,alu_out);
 multiplexador mux(mux_select,imm,r0_out,r1_out,r2_out,r3_out,r4_out,r5_out,
-    r6_out,r7_out,alu_out,data_bus);
+    r6_out,r7_out,alu_reg_out,data_bus);
 logica_de_controle log_ctl(resetn, saida_contador, iin[15:7],
     mux_select, regs_enable, alu_op_select, a_reg_enable, alu_reg_enable,clear);
 
@@ -34,7 +36,7 @@ registrador r5(regs_enable[5],clock,data_bus,r5_out);
 registrador r6(regs_enable[6],clock,data_bus,r6_out);
 registrador r7(regs_enable[7],clock,data_bus,r7_out);
 registrador a(a_reg_enable,clock,data_bus,a_reg_out);
-registrador r(alu_reg_enable,clock,data_bus,alu_out);
+registrador r(alu_reg_enable,clock,alu_out,alu_reg_out);
 
 assign bus = data_bus;
 
