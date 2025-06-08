@@ -9,7 +9,7 @@ all: $(ARQ_VCD)
 $(ARQ_VCD): $(ARQ_SAIDA)
 	@ vvp $(ARQ_SAIDA)
 
-$(ARQ_SAIDA): 
+$(ARQ_SAIDA):
 	@ iverilog -I$(FONTE) $(ARQ_TESTE) -o $(ARQ_SAIDA) 
 
 wave: $(ARQ_SAIDA) $(ARQ_VCD)
