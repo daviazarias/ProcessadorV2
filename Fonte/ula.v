@@ -10,7 +10,7 @@ module ula (
         2'd0: r = A + B;
         2'd1: r = A - B;
         2'd2: r = ~(A & B);
-        2'd3: r = A;
+        2'd3: r = 16'dz;
     endcase
 
 endmodule
