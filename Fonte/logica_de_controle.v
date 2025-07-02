@@ -49,10 +49,13 @@ assign alu_op_select  = (`ALU_OPERATION) ? opcode[1:0] : `NO_OP;
 // 'wr_enable' de um dos 8 registradores endereçáveis.
 assign regs_enable    = (counter == 2'b11 && opcode != `OUT) ? regs_select : 8'h00;
 
+// Habilita a escrita no registrador de imediato.
 assign imm_wr_enable  = (counter == 2'b00);
 
+// Habilita a escrita no contador de programa.
 assign pc_wr_enable   = (counter == 2'b11);
 
+// Indica que a operação atual é um desvio condicional.
 assign branch_select  = (opcode == `BEZ);
 
 always @(counter) 

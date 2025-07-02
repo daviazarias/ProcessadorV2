@@ -19,4 +19,5 @@ memoria_de_instrucoes mem(clock, mem_wr, endereco, mem_in, iin);
 
 assign endereco = (mem_wr) ? endereco_ext : endereco_proc;
 
-endmodule;
+endmodule
+
