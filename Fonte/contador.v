@@ -9,5 +9,4 @@ always @(clear)
 always @(posedge clock)
     saida_cont <= saida_cont + 2'b01;
 
-
 endmodule

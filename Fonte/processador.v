@@ -4,32 +4,40 @@
 `include "contador.v"
 `include "extensor.v"
 `include "ula.v"
+`include "contador_de_programa.v"
+`include "seletor_de_endereco.v"
 
 module processador(
     input         clock,
     input         resetn,
     input  [15:0] iin,
-    output [15:0] bus
+    output [15:0] bus,
+    output [15:0] endereco
 );
 
 wire [3:0]  mux_select;
 wire [7:0]  regs_enable;
 wire [1:0]  alu_op_select;
 wire [1:0]  saida_contador;
-wire [15:0] imm, a_reg_out, alu_out, alu_reg_out;
+wire [15:0] imm, a_reg_out, alu_out, alu_reg_out, pc_in;
 wire [15:0] r0_out, r1_out, r2_out, r3_out, r4_out, r5_out, r6_out, r7_out;
 
 contador cont(clock, clear, saida_contador);
 
-extensor ext(iin[9:0], imm);
+extensor ext(clock, imm_wr_enable, iin[9:0], imm);
 
 ula alu(a_reg_out, bus, alu_op_select, alu_out);
+
+seletor_de_endereco addr_select(branch_select, bus, imm, endereco, pc_in);
+
+contador_de_programa pc(pc_wr_enable, pc_in, resetn, clock, endereco);
 
 multiplexador mux(mux_select, imm, r0_out, r1_out, r2_out, r3_out, 
     r4_out, r5_out,r6_out, r7_out, alu_reg_out, bus);
 
 logica_de_controle log_ctl(resetn, saida_contador, iin[15:7], mux_select,
-    regs_enable, alu_op_select, a_reg_enable, alu_reg_enable,clear);
+    regs_enable, alu_op_select, a_reg_enable, alu_reg_enable, imm_wr_enable,
+    pc_wr_enable, branch_select, clear);
 
 registrador r0(regs_enable[0], clock, bus, r0_out);
 registrador r1(regs_enable[1], clock, bus, r1_out);

@@ -9,6 +9,9 @@ module logica_de_controle(
     output     [1:0] alu_op_select,
     output           a_reg_enable,
     output           alu_reg_enable,
+    output           imm_wr_enable,
+    output           pc_wr_enable,
+    output           branch_select,
     output reg       clear
 );
 
@@ -18,6 +21,8 @@ module logica_de_controle(
 `define NAN 3'b010
 `define LDI 3'b101
 `define OUT 3'b100
+`define BEZ 3'b110
+`define HLT 3'b011
 
 `define ALU_OPERATION (opcode == `ADD || opcode == `SUB || opcode == `NAN)
 `define RX_SELECT      {1'b0,rx}
@@ -44,18 +49,26 @@ assign alu_op_select  = (`ALU_OPERATION) ? opcode[1:0] : `NO_OP;
 // 'wr_enable' de um dos 8 registradores endereçáveis.
 assign regs_enable    = (counter == 2'b11 && opcode != `OUT) ? regs_select : 8'h00;
 
+assign imm_wr_enable  = (counter == 2'b00);
+
+assign pc_wr_enable   = (counter == 2'b11);
+
+assign branch_select  = (opcode == `BEZ);
+
 always @(counter) 
 begin
     case(counter)
 
-        2'b00: 
-            mux_select <= `NO_OUTPUT;
+        2'b00: mux_select <= `NO_OUTPUT;
 
         2'b01: 
             begin
                 opcode = iin[8:6];
                 rx     = iin[5:3];
                 ry     = iin[2:0];
+
+                if(opcode == `HLT) 
+                    $finish;
 
                 if(`ALU_OPERATION)
                     mux_select <= `RX_SELECT;
@@ -67,10 +80,10 @@ begin
 
         2'b11: 
             case(opcode)
-                `OUT   : mux_select <= `RX_SELECT;
-                `REP   : mux_select <= `RY_SELECT;
-                `LDI   : mux_select <= `IMM_SELECT;
-                default: mux_select <= `ALU_OUT_SELECT;
+                `OUT, `BEZ: mux_select <= `RX_SELECT;
+                `REP      : mux_select <= `RY_SELECT;
+                `LDI      : mux_select <= `IMM_SELECT;
+                default   : mux_select <= `ALU_OUT_SELECT;
             endcase
 
     endcase
