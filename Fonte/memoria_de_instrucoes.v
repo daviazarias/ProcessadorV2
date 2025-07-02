@@ -14,4 +14,7 @@ always @ (clock)
     if(wr_enable)
         mem_inst[endereco] = data_in;
 
-endmodule;
+endmodule
+
+
+
