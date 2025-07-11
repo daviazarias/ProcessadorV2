@@ -25,7 +25,7 @@ module logica_de_controle(
 `define HLT 3'b011
 
 `define ALU_OPERATION      (opcode == `ADD || opcode == `SUB || opcode == `NAN)
-`define WRITE_OPERATION (opcode != `OUT && opcode != `BEZ)
+`define WRITE_OPERATION    (opcode != `OUT && opcode != `BEZ)
 `define RX_SELECT          {1'b0,rx}
 `define RY_SELECT          {1'b0,ry}
 `define IMM_SELECT         4'b1000 
