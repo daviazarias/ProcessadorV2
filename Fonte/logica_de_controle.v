@@ -25,7 +25,7 @@ module logica_de_controle(
 `define HLT 3'b011
 
 `define ALU_OPERATION      (opcode == `ADD || opcode == `SUB || opcode == `NAN)
-`define NO_WRITE_OPERATION (opcode != `OUT && opcode != `BEZ)
+`define WRITE_OPERATION (opcode != `OUT && opcode != `BEZ)
 `define RX_SELECT          {1'b0,rx}
 `define RY_SELECT          {1'b0,ry}
 `define IMM_SELECT         4'b1000 
@@ -52,7 +52,7 @@ assign alu_op_select  = (`ALU_OPERATION) ? opcode[1:0] : `NO_OP;
 // Cada elemento desse array de 8 bits é ligado ao campo 
 // 'wr_enable' de um dos 8 registradores endereçáveis.
 
-assign regs_enable    = (counter == 2'b11 && `NO_WRITE_OPERATION) ? regs_select : 8'h00;
+assign regs_enable    = (counter == 2'b11 && `WRITE_OPERATION) ? regs_select : 8'h00;
 
 // Habilita a escrita no registrador de imediato.
 
